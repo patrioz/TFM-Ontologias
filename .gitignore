@@ -6,8 +6,7 @@
 .project
 .metadata
 bin/
-tmp/
-JAR/
+tmp
 *.tmp
 *.bak
 *.swp
@@ -24,6 +23,7 @@ salida/
 foops*/
 pruebas_test/
 .temp-FOOPS-classpath-arg-1680462157242.txt
+target/
 
 # External tool builders
 .externalToolBuilders/

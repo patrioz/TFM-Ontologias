@@ -255,6 +255,7 @@ public class FOOPS {
                   j++; 
           	}
           	Runtime.getRuntime().exec("Rscript codigo_R.R");
+
           	
           }catch(Exception e){
               logger.error("Error! "+ e.getMessage());
