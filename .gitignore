@@ -43,7 +43,6 @@ target/
 .idea/
 *.iml
 lib/
-jar/
 
 #################
 ## Visual Studio
