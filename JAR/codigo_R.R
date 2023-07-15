@@ -195,9 +195,12 @@ tabla_licencia <- Oi_df_inicial %>%
 
 #_ 4.5. Test ----
 
+
 tabla_test <- tabla_union %>% 
-  select(ontologia, id, total_passed_tests) %>% 
-  mutate(pasa_test = ifelse(total_passed_tests >=1, 1, 0))
+  select(ontologia, id, total_passed_tests, total_tests_run) %>% 
+  mutate(pasa_test = ifelse(total_passed_tests ==total_tests_run, 1, 0))
+         
+
 
 tabla_pasa_test <- tabla_union %>% 
   select(ontologia, id, total_passed_tests) %>% 
@@ -205,7 +208,6 @@ tabla_pasa_test <- tabla_union %>%
   filter(pasa_test == 1) %>% 
   count(id) %>% 
   rename(n_ontologias_passed_test = n)
-
 
 
 #5.GRAFICOS----
@@ -246,11 +248,12 @@ dev.off()
 
 #_5.3. Test----
 
+
 test <- table(tabla_union %>% 
-  select(ontologia, id, total_passed_tests) %>% 
-  mutate(pasa_test = ifelse(total_passed_tests >=1, 1, 0)) %>% 
-  filter(pasa_test == 1) %>% 
-  select(id))
+                select(ontologia, id, total_passed_tests,total_tests_run ) %>% 
+                mutate(pasa_test = ifelse(total_passed_tests ==total_tests_run, 1, 0)) %>% 
+                filter(pasa_test == 1 ) %>% 
+                select(id))
 
 jpeg(file="plot_test.jpeg")
 barplot_st <- barplot(test, las=2, cex.names=.5,
@@ -260,8 +263,6 @@ barplot_st <- barplot(test, las=2, cex.names=.5,
 
 text(barplot_st, test + 1, labels = test)
 dev.off()
-
-
 # 6. EXPORTAR FICHEROS ----
 
 #Guardamos los archivos en la carpeta que queremos convertir a zip
